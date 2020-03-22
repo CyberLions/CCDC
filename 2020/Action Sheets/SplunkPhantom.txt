@@ -12,12 +12,13 @@ Phantom_Machine:
 Change passwords (or lock unused accounts)
 Change users / delete users
 Update OS (not vulnerable to dirtycow)
-cd 
+
 Splunk:
 Create new user
 Lock default admin account
 Update Splunk to latest version
-Make sure all forwarders have their own keys and certificates.
+Add login-notification script
+Make sure all forwarders have their own keys and certificates. (test environment had SSL disabled)
 Create deployment server for easy remote management.
 
 Phantom:
