@@ -38,23 +38,12 @@ Outline of this year's competition, responsibilities, and after action report.
 - DNS
 
 ### Team Coverage
-- Brant - Win 8.1 (> PA) **Giving up box to Namo/Petr to configure PA/Phantom**
-- Petr - Phantom 4.1.94 > Splunk
+- Brant - Phantom 4.1.94 > Win 8.1 (> PA) **Giving up box to Namo/Petr to configure PA/Phantom**
+- Petr - > Splunk
 - Namo - PA > Win 2008
 - Justin - CentOS w/ Ecomm > Debian
 - Matt - Win 2008 > Win 10
 - Mark - Ubuntu w/ DNS
-- Jason - Debian w/ MySQL
-- Evan - Fedora 21 w/ Webmail and WebApps
-
-### Team Coverage after the Call
-_Shutdown Phantom and Ubuntu at beginning of competition._
-- Brant - Win 10 > Injects and IR
-- Petr - Splunk > CentOS/Debian
-- Namo - PA **Sourcing from Win 8.1** > Win 2008
-- Justin - CentOS w/ Ecomm > Debian
-- Matt - Win 2008 > Win 10
-- Mark - Fedora 21 w/ Webmail and WebApps
 - Jason - Debian w/ MySQL
 - Evan - Fedora 21 w/ Webmail and WebApps
 
