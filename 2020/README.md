@@ -139,11 +139,36 @@ Post-Comp
 #### CentOS 6.0
 Pre-Comp
 
+- I found that google was a really good resource
 
 Comp
 
+- user logged in as _vmd, ran killall -u _vmd, disabled sshd, and deleted the user
+
+- sit0 interface opened?
+
+- 4:30 sshd service started. Killed sshd.
+- 4:37 sshd service started again?
+- 5:09 noticed a lot of python, killed using killall python
+
+- 5:46 Noticed that ls shows a picture of a rabbit, my username has been changed to charminultrasoft
+    - sudo yum install --disableexcludes=all update
+    - finally running an update!
+    - fixed by updating coreutils
+    
+- Removed nc, sshd
+- 6:08 noticed crontab and php have a script that downloads and runs a backdoor
+
+- 6:16 got e-commerce up after setting the DB, 
+
+- 7:30 uninstalled cronie to finally remove all backdoors 
+- 7:36 centos slowed to a halt and I needed to restart
+- 7:4? centos is completely pwned  
 
 Post-Comp
+
+- I wish I looked into apache much earlier on
+- I should've realized that I could find the php configuration file 
 
 #### Fedora 21
 Pre-Comp
