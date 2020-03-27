@@ -108,12 +108,29 @@ Post-Comp
 
 #### Ubuntu 12.04
 Pre-Comp
-
+- verify that they are using Bind9 for DNS
+- check open ports: FTP on 21, nc listener on 54
+- see that there are a bunch of "user" directories that have no actual users associated with them
+- directories contain company SSNs and CC#s
 
 Comp
-
+- kill nc and ftp
+- change user and root password
+- check sudoers: bad stuff in sudoers
+- check cron
+- check environment variables
+- bind9 starts nc listener every time it is started
+- block ports that are not DNS
+- LDAP service went crazy for some reason killed it everytime machine restarted
 
 Post-Comp
+- rkhunter
+- check processes more
+- go through lockdown steps first then check out other interesting things on the environment
+- better ways to document attacks and sources
+- practice reporting 
+- change password several times throughout the competition
+
 
 #### Win 2008 R2
 Pre-Comp
