@@ -64,13 +64,19 @@ Outline of this year's competition, responsibilities, and after action report.
 
 #### Phantom 4.1.94
 Pre-Comp
-
+Remove users
+Check service
+Secure Phantom
 
 Comp
-
+Change passwords (or lock unused accounts)
+Change users / delete users
+Update OS (not vulnerable to dirtycow)
+Checked cron
+Secured Phantom service
 
 Post-Comp
-
+-n/a stayed online no incidents.
 
 #### Debian 7.8
 Pre-Comp
@@ -129,12 +135,22 @@ Post-Comp
 
 #### Splunk 7.2.0
 Pre-Comp
-
+Create new user
+Lock default admin account
+Update Splunk to latest version
+Make sure all forwarders have their own keys and certificates. (test environment had SSL disabled)
+Create deployment server for easy remote management.
 
 Comp
-
+Changed splunk user password
+Created CyberLions user
+removed SSH
+Updated iptables
+Locked root
+deleted user "default" in splunk
 
 Post-Comp
+n/a- No incidents
 
 #### CentOS 6.0
 Pre-Comp
