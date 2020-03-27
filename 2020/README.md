@@ -150,7 +150,7 @@ Locked root
 deleted user "default" in splunk
 
 Post-Comp
-n/a- No incidents
+No incidents, but need to streamline forwarder deployment. Will work to organize a deployment plan with the team.
 
 #### CentOS 6.0
 Pre-Comp
