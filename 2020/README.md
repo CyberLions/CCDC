@@ -132,6 +132,21 @@ Comp
 
 
 Post-Comp
+- Local user accounts never checked (until the very end), we never ran antimalware on it :(
+- Should've created local user accounts!
+
+#### PaloAlto
+Pre-Comp
+- Checked and deleted bogus admin accounts and kicked red team admin sessions out
+- Security policies tightened
+
+Comp
+- Red team somehow got admin access (shared password getting pwn'd?)
+
+Post-Comp
+- PaloAlto maintenance mode would not allow password reset, only full factory reset
+- We should keep a backup of a "known-working" PA configuration ready to restore, if this happens
+
 
 #### Splunk 7.2.0
 Pre-Comp
