@@ -33,7 +33,7 @@
 # LoginGraceTime 2m
 PermitRootLogin no
 StrictModes yes
-MaxAuthTries 5
+MaxAuthTries 2
 # MaxSessions 10
 
 PubkeyAuthentication no
