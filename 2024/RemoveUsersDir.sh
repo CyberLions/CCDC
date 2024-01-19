@@ -1,7 +1,9 @@
 #!/bin/bash
+#use the command below to select line numbers (ex 57-60) and put them in badusers.txt
+#sed -n '57,60p' /etc/passwd > badusers.txt
 
 #File containing selected /etc/passwd entries
-file_path="/path/to/selected_entries.txt"
+file_path="/path/to/badusers.txt"
 
 #Check if any matching users were found
 if [ -f "$file_path" ]; then
