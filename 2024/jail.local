@@ -89,7 +89,7 @@ before = paths-debian.conf
 # "ignoreip" can be a list of IP addresses, CIDR masks or DNS hosts. Fail2ban
 # will not ban a host which matches an address in this list. Several addresses
 # can be defined using space (and/or comma) separator.
-#ignoreip = 127.0.0.1/8 ::1 172.20.240.10 172.20.242.200 172.20.240.20 172.20.242.10 172.20.241.20 172.20.241.30 172.20.241.30 172.20.241.30 172.20.242.150
+ignoreip = 127.0.0.1 172.20.240.10 172.20.242.200 172.20.240.20 172.20.242.10 172.20.241.20 172.20.241.30 172.20.241.30 172.20.241.30 172.20.242.150
 
 # External command that will take an tagged arguments to ignore, e.g. <ip>,
 # and return true if the IP is to be ignored. False otherwise.
