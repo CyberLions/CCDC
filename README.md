@@ -9,14 +9,40 @@ Blue Team competition with a live professional Red Team attacking a given topolo
 Active
 - Jacob Dorhcinsky (Captain)
 - Brendan McShane
-- Liam Geyer
+- [Liam Geyer](https://lfgberg.org)
 - Jenna Fox
 - Maguire Younes
 - Cy Fisher
 - Aiden Johnson
 - Evan Glickman
 
-## Past Teams (not listed in any particular order)
+Alternates
+- Jonathan Skeete
+- Aidan Ethier
+
+## Past Teams
+
+### 2023 - 2nd Place MACCDC Regional Finals
+
+Active
+- [Liam Geyer](https://lfgberg.org) (Captain)
+- Jenna Fox
+- Jacob Dorchinsky
+- Brendan McShane
+- Elizabeth Stroud
+- Kira Leavitt
+- Shawn Cooper
+- Jackson Ortiz
+
+### 2022
+- Alec Sudol (Captain)
+- [Liam Geyer](https://lfgberg.org)
+- Jenna Fox
+- Joshua Merill
+- Eugene Ryoo
+- Campbell Baker
+- Kira Leavitt
+- Jameswell Zhang
 
 ### 2020
 
