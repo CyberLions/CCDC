@@ -31,23 +31,29 @@ function Block-IncomingPort {
     }
 }
 
-# Disable OpenSSH service
+# Stop & Disable OpenSSH Authentication Agent
 Disable-Service -serviceName 'ssh-agent'
 
-# Stop OpenSSH process
+# Stop & Disable OpenSSH SSH Server
+Disable-Service -serviceName 'sshd'
+
+# Ensure ssh agent process is stopped
+Stop-ProcessByName -processName 'ssh-agent'
+
+# Ensure sshd proces is stopped
 Stop-ProcessByName -processName 'sshd'
 
 # Disable Remote Desktop Protocol (RDP) service
 Disable-Service -serviceName 'TermService'
 
-# Stop RDP processes
-Stop-ProcessByName -processName 'rdp'
+# Stop & Disable TightVNC service
+Disable-Service -serviceName 'tvnserver'
 
-# Disable Virtual Network Computing (VNC) service
-Disable-Service -serviceName 'vncserver'
+# Stop all processes with vnc in name (will work with at least thinvnc)
+Stop-ProcessByName -processName '*vnc*'
 
-# Stop VNC process (adjust the process name as per your VNC configuration)
-Stop-ProcessByName -processName 'vnc'
+# Stop & Disable WinRM service
+Disable-Service -serviceName 'WinRM'
 
 # Block OpenSSH port (default: 22)
 Block-IncomingPort -port 22
@@ -55,6 +61,11 @@ Block-IncomingPort -port 22
 # Block RDP port (default: 3389)
 Block-IncomingPort -port 3389
 
-# Block VNC port (adjust the port number as per your VNC configuration)
-Block-IncomingPort -port <your_vnc_port_number>
+# Block VNC port
+Block-IncomingPort -port 5900
+
+# Block WinRM http & https port 
+Block-IncomingPort -port 5985
+Block-IncomingPort -port 5986
+
 
