@@ -1,3 +1,4 @@
 @echo off
-netsh advfirewall set allprofiles firewallpolicy blockinbound,blockoutbound
+netsh advfirewall firewall add rule name="Block All Inbound" dir=in action=block
+netsh advfirewall firewall add rule name="Block All Outbound" dir=out action=block
 
