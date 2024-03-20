@@ -55,9 +55,6 @@ Stop-ProcessByName -processName '*vnc*'
 # Stop & Disable WinRM service
 Disable-Service -serviceName 'WinRM'
 
-# Disable PS-Remoting - Removed cause it scuffs out, disabling WinRM should be fine.
-# Disable-PSRemoting
-
 # Block OpenSSH port (default: 22)
 Block-IncomingPort -port 22
 
@@ -70,5 +67,8 @@ Block-IncomingPort -port 5900
 # Block WinRM http & https port 
 Block-IncomingPort -port 5985
 Block-IncomingPort -port 5986
+
+# Disable PS-Remoting - May give errors; ignore
+Disable-PSRemoting -Force
 
 
