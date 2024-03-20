@@ -26,6 +26,12 @@ if %errorlevel% equ 0 (
     echo Terminated notepad.exe process.
 )
 
+tasklist /fi "imagename eq powershell.exe" | find ":" > nul
+if %errorlevel% equ 0 (
+    taskkill /f /im notepad.exe
+    echo Terminated notepad.exe process.
+)
+
 timeout /t 2.5 > nul
 goto LOOP
 
