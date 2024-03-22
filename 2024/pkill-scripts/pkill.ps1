@@ -1,5 +1,5 @@
 # List of executable names to monitor and terminate
-$exeNames = @("msedge", "wmiprvse", "calc", "notepad", "cmd")
+$exeNames = @("msedge", "wmiprvse", "calc", "notepad", "cmd", "GooseDesktop", "MEMZ")
 
 while ($true) {
     foreach ($exeName in $exeNames) {
