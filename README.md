@@ -4,7 +4,7 @@ Blue Team competition with a live professional Red Team attacking a given topolo
 
 ## Current Team
 
-### 2024
+### 2024 - 2nd Place MACCDC Regional Finals
 
 Active
 - Jacob Dorhcinsky (Captain)
@@ -22,7 +22,7 @@ Alternates
 
 ## Past Teams
 
-### 2023 - 2nd Place MACCDC Regional Finals
+### 2023 - tied 2nd Place MACCDC Regional Finals
 
 Active
 - [Liam Geyer](https://lfgberg.org) (Captain)
