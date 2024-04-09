@@ -11,6 +11,7 @@ Several scripts for hardening ubuntu boxes
 * core dumps and max logins
 * enables system logging with `rsyslog`
 * sets permissions on important files
+* Sets government STIG banner because why not
 
 ### removeBadPackages.sh
 * This script removes known bad packages/software from the box
