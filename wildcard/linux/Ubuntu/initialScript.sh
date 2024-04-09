@@ -36,3 +36,7 @@ echo 0 | tee /proc/sys/net/ipv4/ip_forward
 # core dumps and max logins
 bash -c 'echo "* hard core 0" >> /etc/security/limits.conf'
 bash -c 'echo "* hard maxlogins 10" >> /etc/security/limits.conf'
+
+#system logging
+systemctl enable rsyslog
+systemctl start rsyslog

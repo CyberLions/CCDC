@@ -9,6 +9,7 @@ Several scripts for hardening ubuntu boxes
     * Password policy yippee!
 * it will enable the firewall (UFW)
 * core dumps and max logins
+* enables system logging with `rsyslog`
 
 ### removeBadPackages.sh
 * This script removes known bad packages/software from the box
