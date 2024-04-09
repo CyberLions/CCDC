@@ -1,4 +1,4 @@
-## Ubuntu Hardening
+# Ubuntu Hardening
 Several scripts for hardening ubuntu boxes
 
 ### initialScript.sh
@@ -8,3 +8,8 @@ Several scripts for hardening ubuntu boxes
 * It will update PAM dependencies
     * Password policy yippee!
 * it will enable the firewall (UFW)
+
+### removeBadPackages.sh
+* This script removes known bad packages/software from the box
+* AUDIT THE PACKAGES LIST BEFORE RUNNING    
+    * Pretty please make sure that you do not accidently remove a required software!
