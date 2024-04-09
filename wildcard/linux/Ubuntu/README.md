@@ -10,6 +10,7 @@ Several scripts for hardening ubuntu boxes
 * it will enable the firewall (UFW)
 * core dumps and max logins
 * enables system logging with `rsyslog`
+* sets permissions on important files
 
 ### removeBadPackages.sh
 * This script removes known bad packages/software from the box
