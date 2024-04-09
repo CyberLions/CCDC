@@ -1,5 +1,6 @@
 # Ubuntu Hardening
 Several scripts for hardening ubuntu boxes
+**YOU NEED TO CLONE THE WHOLE REPO BECAUSE THESE SCRIPTS PULL FROM FILES IN THIS FOLDER**
 
 ### initialScript.sh
 * This script takes a while to run! 
