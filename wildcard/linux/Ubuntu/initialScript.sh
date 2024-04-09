@@ -32,3 +32,7 @@ ufw enable
 sysctl -n net.ipv4.tcp_syncookies
 echo 'net.ipv6.conf.all.disable_ipv6 = 1' | tee -a /etc/sysctl.conf
 echo 0 | tee /proc/sys/net/ipv4/ip_forward
+
+# core dumps and max logins
+bash -c 'echo "* hard core 0" >> /etc/security/limits.conf'
+bash -c 'echo "* hard maxlogins 10" >> /etc/security/limits.conf'
