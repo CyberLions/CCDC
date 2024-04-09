@@ -11,5 +11,5 @@ Several scripts for hardening ubuntu boxes
 
 ### removeBadPackages.sh
 * This script removes known bad packages/software from the box
-* AUDIT THE PACKAGES LIST BEFORE RUNNING    
+* **AUDIT THE PACKAGES LIST BEFORE RUNNING**    
     * Pretty please make sure that you do not accidently remove a required software!
