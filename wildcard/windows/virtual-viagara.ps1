@@ -2,6 +2,7 @@
 # Hugs and kisses to Chandi #Fortnite
 
 # TODO: Firefox config
+# TODO: Audit group membership
 
 # VARIABLES TO SET - READ THE README
 $allowedUsers = @("TODO")
