@@ -81,15 +81,20 @@ foreach ($user in $localUsersToRemove) {
     # Del user
     Remove-LocalUser -Name $user -Confirm:$false
 
-    # Del user folderr
+    # Del user folder
     $userFolderPath = "C:\Users\$user"
     if (Test-Path $userFolderPath -PathType Container) {
         Remove-Item -Path $userFolderPath -Recurse -Force
     }
 }
 
+Get-WmiObject win32_useraccount | Foreach-Object {
+    $ua = ([adsi](“WinNT://”+$_.caption).replace(“\”,”/”))
+    $ua.SetPassword("BallsInYourFace69!")
+}
+
 ## Set all local user passwords, ensure they expire
-Get-LocalUser | ForEach-Object { $_ | Set-LocalUser -Password $uberSecurePassword -PasswordNeverExpires $false -UserMayChangePassword $true -AccountNeverExpires }
+Get-LocalUser | ForEach-Object { $_ | Set-LocalUser -PasswordNeverExpires $false -UserMayChangePassword $true -AccountNeverExpires }
 
 if ($isDomainController -eq $true){
     $allADUsers = Get-ADUser -Filter * -Property SamAccountName | Select-Object -ExpandProperty SamAccountName
