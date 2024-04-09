@@ -9,7 +9,7 @@ $usersToRemove = $allUsers | Where-Object { $_ -notin $usersToKeep }
 
 # Remove users not in the array
 foreach ($user in $usersToRemove) {
-    Remove-LocalUser -Name $user -Force
+    Remove-LocalUser -Name $user -Confirm:$false
 }
 
 Write-Host "Users removed successfully."
