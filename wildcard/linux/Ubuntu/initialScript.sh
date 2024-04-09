@@ -97,3 +97,11 @@ bash -c 'echo "You are accessing a U.S. Government (USG) Information System (IS)
 -Communications using, or data stored on, this IS are not private, are subject to routine monitoring, interception, and search, and may be disclosed or used for any USG-authorized purpose.
 -This IS includes security measures (e.g., authentication and access controls) to protect USG interests--not for your personal benefit or privacy.
 -Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details." > /etc/issue.net'
+
+# Set user password age requirements
+y=$(awk -F':' '{ print $1}' /etc/passwd)
+	declare -a y
+	for x in ${y[@]}; do
+		 #x="administrator"
+		 chage -m 7 -M 90 -W 14 $x
+	done

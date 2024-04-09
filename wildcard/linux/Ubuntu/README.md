@@ -12,6 +12,7 @@ Several scripts for hardening ubuntu boxes
 * enables system logging with `rsyslog`
 * sets permissions on important files
 * Sets government STIG banner because why not
+* adds password age requirements
 
 ### removeBadPackages.sh
 * This script removes known bad packages/software from the box
