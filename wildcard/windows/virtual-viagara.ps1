@@ -1,7 +1,6 @@
 # Lovingly plagiarised and authored by @Lfgberg - https://lfgberg.org
 # Hugs and kisses to Chandi #Fortnite
 
-# TODO: Firefox config
 # TODO: Audit group membership
 
 # VARIABLES TO SET - READ THE README
@@ -21,7 +20,6 @@ $isDomainController = $false
 if (Get-CimInstance -Class Win32_OperatingSystem -Filter 'ProductType = "2"') {
     $isDomainController = $true
 }
-
 
 # Ensure script is running as administrator
 If (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {   
@@ -1175,5 +1173,9 @@ if (Get-Service -Name CertSvc 2>$null) {
     $caName = ((Get-ADObject -LDAPFilter "(objectClass=pKIEnrollmentService)" -SearchBase $searchBase).Name | Out-String).Trim()
     reg add "HKLM\SYSTEM\CurrentControlSet\Services\CertSvc\Configuration\$caName" /v AuditFilter /t REG_DWORD /d 127 /f | Out-Null
 }
+
+# Save firefox configs
+Invoke-WebRequest -Uri https://raw.githubusercontent.com/CyberLions/CCDC/master/wildcard/windows/firefox-configs/mozilla.cfg -OutFile "$env:Programfiles\Mozilla Firefox\"
+Invoke-WebRequest -Uri https://raw.githubusercontent.com/CyberLions/CCDC/master/wildcard/windows/firefox-configs/local-settings.js -OutFile "$env:Programfiles\Mozilla Firefox\defaults\pref"
 
 Stop-Transcript
