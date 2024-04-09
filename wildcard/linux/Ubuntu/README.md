@@ -23,3 +23,7 @@ Several scripts for hardening ubuntu boxes
 ### configFirefoxPolicies
 * This script will update firefox policies so they aren't crap
 * Firefox will need to be refreshed after this runs
+
+### sysctl.conf
+* This is not a script, so don't try to run it :D
+* append these changes to the bottom of sysctl.conf
