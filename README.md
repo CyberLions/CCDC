@@ -22,9 +22,8 @@ Alternates
 
 ## Past Teams
 
-### 2023 - tied 2nd Place MACCDC Regional Finals
+### 2023 - tied 2nd Place MACCDC Regional Finals (3rd)
 
-Active
 - [Liam Geyer](https://lfgberg.org) (Captain)
 - Jenna Fox
 - Jacob Dorchinsky
