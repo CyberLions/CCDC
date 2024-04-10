@@ -93,6 +93,27 @@ Get-WmiObject win32_useraccount | Foreach-Object {
     $ua.SetPassword("BallsInYourFace69!")
 }
 
+$allLocalUsers = Get-LocalUser | Select-Object -ExpandProperty Name
+$privilegedGroups = @("Administrators")
+
+foreach ($user in $allLocalUsers) {
+    # Check if user is in allowedAdministrators group
+    $isAllowedAdministrator = $allowedAdministrators -contains $user
+
+    # If user is not in allowedAdministrators group, check for privileged groups
+    if (-not $isAllowedAdministrator) {
+        $userGroups = Get-LocalUser $user | Select-Object -ExpandProperty Group
+
+        foreach ($group in $userGroups) {
+            # Check if user is part of any privileged group
+            if ($privilegedGroups -contains $group) {
+                Remove-LocalGroupMember -Group $group -Member $user -ErrorAction SilentlyContinue
+                # You can add additional logging or actions here if needed
+            }
+        }
+    }
+}
+
 ## Set all local user passwords, ensure they expire
 Get-LocalUser | ForEach-Object { $_ | Set-LocalUser -PasswordNeverExpires $false -UserMayChangePassword $true -AccountNeverExpires }
 
