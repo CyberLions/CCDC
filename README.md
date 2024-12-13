@@ -13,7 +13,7 @@ Active
 - Jenna Fox
 - Maguire Younes
 - Cy Fisher
-- Aiden Johnson
+- [Aiden Johnson](https://tgm.one)
 - Evan Glickman
 
 Alternates
