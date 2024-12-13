@@ -11,7 +11,7 @@ Active
 - Brendan McShane
 - [Liam Geyer](https://lfgberg.org)
 - Jenna Fox
-- Maguire Younes
+- [Maguire Younes](https://maguireyounes.com)
 - Cy Fisher
 - [Aiden Johnson](https://tgm.one)
 - Evan Glickman
