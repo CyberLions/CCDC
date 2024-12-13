@@ -4,9 +4,25 @@ Blue Team competition with a live professional Red Team attacking a given topolo
 
 ## Current Team
 
+Active 
+- Aidan Eithier
+- Brendan McShane
+- [Aiden Johnson](https://tgm.one)
+- [Maguire Younes](https://maguireyounes.com)
+- Cy Fisher
+- [Liam Geyer](https://lfgberg.org)
+- Asa Reynolds
+
+Alternates
+- Isabella Masso
+- Owen Dransfield
+- Walker Kennedy
+- Dhrupad Joshi
+
+## Past Teams
+
 ### 2024 - 2nd Place MACCDC Regional Finals
 
-Active
 - Jacob Dorhcinsky (Captain)
 - Brendan McShane
 - [Liam Geyer](https://lfgberg.org)
@@ -19,8 +35,6 @@ Active
 Alternates
 - Jonathan Skeete
 - Aidan Ethier
-
-## Past Teams
 
 ### 2023 - tied 2nd Place MACCDC Regional Finals (3rd)
 
