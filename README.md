@@ -14,7 +14,7 @@ Active
 - Izzy Masso
 
 Alternates
-- Isabella Masso
+- Asa Reynolds
 - Owen Dransfield
 - Walker Kennedy
 - Dhrupad Joshi
