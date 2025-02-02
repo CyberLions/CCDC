@@ -11,7 +11,7 @@ Active
 - [Maguire Younes](https://maguireyounes.com)
 - Cy Fisher
 - [Liam Geyer](https://lfgberg.org)
-- Asa Reynolds
+- Izzy Masso
 
 Alternates
 - Isabella Masso
