@@ -309,8 +309,8 @@ echo "Service check completed."
 
 ### Backup files
 
-mkdir /opt/backups
-cp -r /var/www/html/* /opt/backups/
+mkdir /etc/balls
+cp -r /var/www/html/* /etc/balls/
 
 ### Apache & PHP
 
@@ -333,7 +333,10 @@ sed -i '/disable_functions/ s/$/exec,shell_exec,system,passthru,popen,proc_open,
 echo "Restarting Apache"
 systemctl restart apache2
 
-chattr +i /var/www/html/prestashop/index.php
+mkdir /opt/backups
+cp -r /var/www/html/* /opt/backups/
+
+# chattr +i /var/www/html/prestashop/index.html
 
 ### Compare suid binaries
 
