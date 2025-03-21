@@ -1,0 +1,58 @@
+# Define monitored directory and snapshot file
+$Directory = "C:\path\to\your\directory"
+$SnapshotFile = "current_snapshot"
+$LogFile = "change_log.txt"
+
+# Check if the snapshot file exists
+if (-Not (Test-Path $SnapshotFile)) {
+    Write-Host "Snapshot file not found. Run the initial snapshot script first."
+    exit 1
+}
+
+# Load the previous snapshot into a hashtable
+$PreviousSnapshot = @{}
+Get-Content $SnapshotFile | ForEach-Object {
+    $Parts = $_ -split " ", 2
+    if ($Parts.Count -eq 2) {
+        $PreviousSnapshot[$Parts[0]] = $Parts[1]
+    }
+}
+
+# Get the current state of the directory
+$CurrentSnapshot = @{}
+$Files = Get-ChildItem -Path $Directory -File -Recurse
+foreach ($File in $Files) {
+    $Hash = (Get-FileHash -Path $File.FullName -Algorithm SHA256).Hash
+    $CurrentSnapshot[$File.FullName] = $Hash
+}
+
+# Detect changes
+$Changes = @()
+
+# Check for modified or new files
+foreach ($File in $CurrentSnapshot.Keys) {
+    if (-Not $PreviousSnapshot.ContainsKey($File)) {
+        $Changes += "NEW FILE: $File"
+    } elseif ($PreviousSnapshot[$File] -ne $CurrentSnapshot[$File]) {
+        $Changes += "MODIFIED FILE: $File"
+    }
+}
+
+# Check for deleted files
+foreach ($File in $PreviousSnapshot.Keys) {
+    if (-Not $CurrentSnapshot.ContainsKey($File)) {
+        $Changes += "DELETED FILE: $File"
+    }
+}
+
+# Log changes if any are found
+if ($Changes.Count -gt 0) {
+    $Timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    $Changes | ForEach-Object { "$Timestamp - $_" } | Out-File -Append -FilePath $LogFile -Encoding UTF8
+    Write-Host "Changes detected! Logged to $LogFile"
+} else {
+    Write-Host "No changes detected."
+}
+
+# Save the new snapshot
+$CurrentSnapshot.GetEnumerator() | ForEach-Object { "$($_.Key) $($_.Value)" } | Out-File -FilePath $SnapshotFile -Encoding UTF8
