@@ -1,0 +1,281 @@
+#!/bin/bash
+
+### Exit if not root
+
+if [[ $EUID -ne 0 ]]; then
+    echo "This script must be run as root. Please use sudo."
+    exit 1
+fi
+
+echo "Users with valid login shells on this system:"
+
+users=$(awk -F: '$7 !~ /(\/sbin\/nologin|\/bin\/false|\/sbin\/shutdown|\/bin\/sync|\/sbin\/halt)/ {print $1}' /etc/passwd)
+
+echo "$users"
+
+### Change specific user's passwords
+
+for user in $users; do
+    read -p "Do you want to change the password for user '$user'? (y/n): " response
+    if [[ "$response" =~ ^[Yy]$ ]]; then
+        passwd "$user"
+    fi
+done
+
+### Disable specific users
+
+for user in $users; do
+    read -p "Do you want to disable the account for user '$user'? (y/n): " disable_response
+    if [[ "$disable_response" =~ ^[Yy]$ ]]; then
+        usermod -L "$user"
+        echo "User '$user' has been disabled."
+    fi
+done
+
+### Crontabs
+
+echo "Enumerating cron jobs for each user..."
+
+for crontab in /var/spool/cron/*; do
+    user=$(basename "$crontab")
+
+    # Check if the user has a crontab
+    if [[ -f "$crontab" ]]; then
+        echo "User: $user"
+        echo "Crontab contents:"
+        cat "$crontab"
+        echo
+
+        # Ask if the crontab should be cleared
+        read -p "Do you want to clear the crontab for user '$user'? (y/n): " response
+        if [[ "$response" =~ ^[Yy]$ ]]; then
+            > "$crontab"  # Clear the crontab by overwriting with an empty file
+            echo "Crontab for user '$user' has been cleared."
+        else
+            echo "Crontab for user '$user' was not cleared."
+        fi
+    fi
+done
+
+### Services
+
+KNOWN_GOOD_SERVICES=(
+    "abrt-ccpp.service"
+    "abrt-oops.service"
+    "abrt-vmcore.service"
+    "abrt-xorg.service"
+    "abrtd.service"
+    "accounts-daemon.service"
+    "alsa-restore.service"
+    "alsa-state.service"
+    "alsa-store.service"
+    "auditd.service"
+    "avahi-daemon.service"
+    "bluetooth.service"
+    "brandbot.service"
+    "chronyd.service"
+    "colord.service"
+    "cpupower.service"
+    "cups.service"
+    "dbus.service"
+    "dm-event.service"
+    "dmraid-activation.service"
+    "dracut-shutdown.service"
+    "ebtables.service"
+    "emergency.service"
+    "exim.service"
+    "firewalld.service"
+    "gdm.service"
+    "getty@tty1.service"
+    "getty@ttyUSB0.service"
+    "hypervkvpd.service"
+    "hypervvssd.service"
+    "initial-setup-graphical.service"
+    "initial-setup-text.service"
+    "ip6tables.service"
+    "iprdump.service"
+    "iprinit.service"
+    "iprupdate.service"
+    "iptables.service"
+    "irqbalance.service"
+    "iscsi.service"
+    "iscsid.service"
+    "iscsiuio.service"
+    "kdump.service"
+    "kmod-static-nodes.service"
+    "ksm.service"
+    "ksmtuned.service"
+    "libstoragemgmt.service"
+    "libvirt-guests.service"
+    "libvirtd.service"
+    "livesys-late.service"
+    "livesys.service"
+    "lvm2-activation-early.service"
+    "lvm2-activation.service"
+    "lvm2-lvmetad.service"
+    "lvm2-monitor.service"
+    "microcode.service"
+    "ModemManager.service"
+    "multipathd.service"
+    "named.service"
+    "netconsole.service"
+    "network.service"
+    "NetworkManager-wait-online.service"
+    "NetworkManager.service"
+    "nfs-lock.service"
+    "ntpd.service"
+    "ntpdate.service"
+    "plymouth-quit-wait.service"
+    "plymouth-quit.service"
+    "plymouth-read-write.service"
+    "plymouth-start.service"
+    "polkit.service"
+    "postfix.service"
+    "rc-local.service"
+    "rescue.service"
+    "rhel-autorelabel-mark.service"
+    "rhel-autorelabel.service"
+    "rhel-configure.service"
+    "rhel-dmesg.service"
+    "rhel-import-state.service"
+    "rhel-loadmodules.service"
+    "rhel-readonly.service"
+    "rngd.service"
+    "rpcbind.service"
+    "rsyslog.service"
+    "rtkit-daemon.service"
+    "sendmail.service"
+    "serial-getty@ttyAMA0.service"
+    "serial-getty@ttymxc0.service"
+    "serial-getty@ttymxc3.service"
+    "serial-getty@ttyO0.service"
+    "serial-getty@ttyO2.service"
+    "serial-getty@ttyS0.service"
+    "smartd.service"
+    "sntp.service"
+    "sshd.service"
+    "syslog.service"
+    "sysstat.service"
+    "systemd-ask-password-console.service"
+    "systemd-ask-password-plymouth.service"
+    "systemd-ask-password-wall.service"
+    "systemd-binfmt.service"
+    "systemd-fsck-root.service"
+    "systemd-initctl.service"
+    "systemd-journal-flush.service"
+    "systemd-journald.service"
+    "systemd-logind.service"
+    "systemd-modules-load.service"
+    "systemd-random-seed-load.service"
+    "systemd-random-seed.service"
+    "systemd-readahead-collect.service"
+    "systemd-readahead-done.service"
+    "systemd-readahead-replay.service"
+    "systemd-reboot.service"
+    "systemd-remount-fs.service"
+    "systemd-shutdownd.service"
+    "systemd-sysctl.service"
+    "systemd-tmpfiles-clean.service"
+    "systemd-tmpfiles-setup-dev.service"
+    "systemd-tmpfiles-setup.service"
+    "systemd-udev-settle.service"
+    "systemd-udev-trigger.service"
+    "systemd-udevd.service"
+    "systemd-update-utmp-runlevel.service"
+    "systemd-update-utmp.service"
+    "systemd-user-sessions.service"
+    "systemd-vconsole-setup.service"
+    "tuned.service"
+    "udisks2.service"
+    "upower.service"
+    "vmtoolsd.service"
+    "crond.service"
+    "apache2.service"
+    "httpd.service"
+)
+
+active_services=$(systemctl list-units --type=service --all | awk '{print $1}' | tail -n +2)
+
+echo "Checking active services..."
+
+for service in $active_services; do
+    if [[ ! " ${KNOWN_GOOD_SERVICES[@]} " =~ " ${service} " ]]; then
+        echo "Unknown service running: $service"
+    fi
+done
+
+echo "Service check completed."
+
+### Backup files
+
+mkdir /etc/balls
+cp -r /etc/ssh/sshd_config* /etc/balls
+
+### Compare suid binaries
+
+KNOWN_BINARIES=(
+    "/usr/libexec/qemu-bridge-helper"
+    "/usr/libexec/spice-gtk-x86_64/spice-client-glib-usb-acl-helper"
+    "/usr/libexec/pulse/proximity-helper"
+    "/usr/libexec/abrt-action-install-debuginfo-to-abrt-cache"
+    "/usr/lib/polkit-1/polkit-agent-helper-1"
+    "/usr/sbin/mount.nfs"
+    "/usr/sbin/usernetctl"
+    "/usr/sbin/userhelper"
+    "/usr/sbin/pam_timestamp_check"
+    "/usr/sbin/unix_chkpwd"
+    "/usr/lib64/dbus-1/dbus-daemon-launch-helper"
+    "/usr/bin/chsh"
+    "/usr/bin/newgrp"
+    "/usr/bin/ksu"
+    "/usr/bin/umount"
+    "/usr/bin/su"
+    "/usr/bin/sudo"
+    "/usr/bin/Xorg"
+    "/usr/bin/chage"
+    "/usr/bin/chfn"
+    "/usr/bin/mount"
+    "/usr/bin/pkexec"
+    "/usr/bin/gpasswd"
+    "/usr/bin/staprun"
+    "/usr/bin/fusermount"
+    "/usr/bin/at"
+    "/usr/bin/passwd"
+    "/usr/bin/crontab"
+)
+
+CURRENT_BINARIES=$(find /usr /bin /home /etc /opt /root /sbin /srv /tmp -perm -4000 -type f 2>/dev/null)
+
+SORTED_KNOWN=$(printf "%s\n" "${KNOWN_BINARIES[@]}" | sort)
+SORTED_FOUND=$(printf "%s\n" $CURRENT_BINARIES | sort)
+
+NEW_BINARIES=$(comm -13 <(echo "$SORTED_KNOWN") <(echo "$SORTED_FOUND"))
+
+if [[ -n "$NEW_BINARIES" ]]; then
+    echo "New setuid binaries detected:"
+    echo "$NEW_BINARIES"
+else
+    echo "No new setuid binaries found."
+fi
+
+### Manual Investigation
+
+## Processes
+
+ps awfux > processes
+
+## Network Connections
+
+ss -peanut > netconn
+netstat -tunp > netconnestab
+netstat -tulnp > netconnlisten
+
+## Sudoers
+
+cat /etc/sudoers | grep -vE "#|Defaults" > sudoers
+
+## SUID Binaries
+
+find /usr /bin /home /etc /opt /root /sbin /srv /tmp -perm -4000 -type f 2>/dev/null > setuid
+
+echo "Script completed."
